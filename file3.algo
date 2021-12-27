@@ -1,0 +1,35 @@
+PROCEDURE dot_product(v1,v2: ARRAY_OF FLOAT, VAR ps:FLOAT)
+VAR
+    i:INTEGER;
+    n:INTEGER=v1.length-1
+    m:INTEGER=v2.length-1
+BEGIN
+    ps:=0;
+    IF (n<>m) THEN
+        Write("we can't do it")
+        ps:=NAN
+        Break;
+    ELSE
+        FOR i FROM 0 TO n STEP 1  DO
+            ps:=ps+v1[i]*v2[i]
+        END_FOR
+    END_IF
+    Write(ps)
+END
+
+ALGORITHM orth_vectors
+VAR
+    vectors:ARRAY_OF ARRAY
+    ps:FLOAT
+    i,j:INTEGER
+    x:INTEGER=vectors.length-1
+BEGIN
+    FOR i FROM 0 TO x-1 STEP 1  DO
+        FOR j FROM i+1 TO x STEP 1  DO
+            dot_product(vectors[i],vectors[j],ps)
+            IF (ps=0) THEN
+                Write(vectors[i],"and",vectors[j],"are orth")
+            END_IF
+        END_FOR
+    END_FOR
+END
